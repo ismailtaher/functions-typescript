@@ -82,3 +82,44 @@ const sumAll = (a: number = 10, b: number, c: number = 2): number => {
 logMsg(sumAll(2, 3));
 logMsg(sumAll(2, 3, 1));
 logMsg(sumAll(undefined, 3));
+
+//
+// Reset Parameters
+//
+
+const total = (a: number, ...nums: number[]): number => {
+  return a + nums.reduce((prev, curr) => prev + curr);
+};
+
+logMsg(total(1, 2, 3, 4));
+
+//
+// never type
+//
+
+// throw error
+const createError = (errMsg: string) => {
+  throw new Error(errMsg);
+};
+
+// infinite loop
+const infinite = () => {
+  let i: number = 1;
+  while (true) {
+    i++;
+    if (i > 100) break; // to break the endless loop
+  }
+};
+
+// custom type guard
+const isNumber = (value: any): boolean => {
+  return typeof value === "number" ? true : false;
+};
+
+// use of the never type
+
+const numberOrString = (value: number | string): string => {
+  if (typeof value === "string") return "string";
+  if (isNumber(value)) return "number";
+  return createError("This should never happen!");
+};

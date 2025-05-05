@@ -49,3 +49,38 @@ const sumAll = (a = 10, b, c = 2) => {
 logMsg(sumAll(2, 3));
 logMsg(sumAll(2, 3, 1));
 logMsg(sumAll(undefined, 3));
+//
+// Reset Parameters
+//
+const total = (a, ...nums) => {
+    return a + nums.reduce((prev, curr) => prev + curr);
+};
+logMsg(total(1, 2, 3, 4));
+//
+// never type
+//
+// throw error
+const createError = (errMsg) => {
+    throw new Error(errMsg);
+};
+// infinite loop
+const infinite = () => {
+    let i = 1;
+    while (true) {
+        i++;
+        if (i > 100)
+            break; // to break the endless loop
+    }
+};
+// custom type guard
+const isNumber = (value) => {
+    return typeof value === "number" ? true : false;
+};
+// use of the never type
+const numberOrString = (value) => {
+    if (typeof value === "string")
+        return "string";
+    if (isNumber(value))
+        return "number";
+    return createError("This should never happen!");
+};
